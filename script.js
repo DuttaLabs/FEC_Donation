@@ -1,4 +1,5 @@
 const apiKey = "plpB2j8ZSG7iUMlAvBuOGgblz3mT6x0c6fVZi1v1";
+
 const categoryHeaders = {
   name: "Name",
   address: "Address",
@@ -10,15 +11,24 @@ const tableHeaders = Object.values(categoryHeaders);
 const numOfHeaders = tableHeaders.length;
 const colWidth = 200; // column width in pixels
 
-//console.log(tableHeaders);
+function setFocus() {
+  document.getElementById("name").focus();
+}
+
 document.getElementById("contribForm").addEventListener("submit", (event) => {
   event.preventDefault();
+  //const table = document.getElementById("resultsTable");
+  //table.setAttribute("display", "none");
+  const headerTable = document.getElementById("headerTable");
+  const resultsTable = document.getElementById("resultsTable");
+  resultsTable.style.setProperty("visibility", "hidden");
+
   const contribName = document.getElementById("name").value;
   const selectedState = document.getElementById("state").value;
-
+  const exactNameMatchCheckbox = document.getElementById("nameCheckbox");
   let url = `https://api.open.fec.gov/v1/schedules/schedule_a/?api_key=${apiKey}&contributor_name=${contribName}&per_page=100&page=1`;
 
-  if (selectedState.length > 0) {
+  if (selectedState != "AllStates") {
     url += `&contributor_state=${selectedState}`;
   }
 
@@ -30,19 +40,28 @@ document.getElementById("contribForm").addEventListener("submit", (event) => {
       return response.json();
     })
     .then((data) => {
-      const resultsTable = document.getElementById("resultsTable");
+      headerTable.setAttribute("width", colWidth * numOfHeaders);
       resultsTable.setAttribute("width", colWidth * numOfHeaders);
       let headerString = "";
       tableHeaders.forEach((header) => {
         headerString += `<th width=${colWidth}>${header}</th>`;
       });
-      resultsTable.innerHTML = `<tr> ${headerString} </tr>`;
+      headerTable.innerHTML = `<tr> ${headerString} </tr>`;
+      resultsTable.innerHTML = ``;
+      //resultsTable.innerHTML = `<tr> ${headerString} </tr>`;
 
       if (data.results && data.results.length > 0) {
         data.results.forEach((contribution) => {
           //if (selectedState == "" || selectedState == contribution.contributor_state) {
+
           const contribNameFormatted = convertNameFormat(contribution.contributor_name);
           const recipient = contribution.committee.name;
+
+          if (exactNameMatchCheckbox.checked) {
+            if (contribNameFormatted.toUpperCase() != contribName.toUpperCase()) {
+              return;
+            }
+          }
           let party = "";
           if (recipient == "ACTBLUE") {
             party = "dem";
@@ -70,6 +89,7 @@ document.getElementById("contribForm").addEventListener("submit", (event) => {
       console.error("There has been a problem with your fetch operation:", error);
       document.getElementById("results").innerHTML = "An error occurred while fetching data.";
     });
+  resultsTable.style.setProperty("visibility", "visible");
 });
 
 function convertNameFormat(name) {

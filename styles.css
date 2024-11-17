@@ -1,7 +1,40 @@
-* {
-  font-family: Arial, Helvetica, sans-serif;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  /* border: 1px solid black; */
+}
+
+/*
+header a {
+  text-decoration: none;
+  color: inherit;
+}
+
+form {
+  background-color: #f1ebcf;
+  display: inline-block;
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: 50px;
+  margin-top: 25px;
+}
+
+div#nameDiv {
+  display: block;
+}
+
+div#formHeader{
+  display: block;
+  text-align: center;
+}
 table, th, td {
   border: 1px solid;
   border-collapse: collapse;
@@ -21,4 +54,113 @@ tr.dem {
 
 tr.repub {
   background-color: #faaaaa
+}
+
+label {
+  display: inline-block;
+  width: 45px;
+  padding: 3px;
+  font-size: 0.9em;
+}
+
+label.checkbox {
+  width: 150px;
+  font-size: 0.9rem;
+}
+
+.inputBox {
+  width: 100px;
+}
+
+button {
+  width: 100px;
+  background-color: lightgray;
+  border-radius: 5px;
+}
+
+*/
+header a {
+  text-decoration: none;
+  color: inherit;
+
+}
+
+header {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+#contribForm {
+  border: 1px solid black;
+  background-color: rgb(245, 248, 246);
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 30px;
+  margin-left: 20px;
+}
+
+#formHeader {
+  width:fit-content;
+  margin: 0 auto;
+  text-align:center;
+}
+
+label.category {
+  display: inline-block;
+  width: 50px;
+  font-size: 0.9rem;
+}
+
+label.checkBox {
+  display: inline-block;
+  width: fit-content;
+  margin-left:20px;
+  font-size: 0.9rem;
+}
+
+input.inputBox {
+  display: inline-bliok;
+  width: 150px;
+}
+
+select#state {
+  width: 150px;
+  margin-top: 5px;
+}
+#searchButton {
+  display: block;
+  margin: auto;
+  width: 100px;
+}
+
+table, th, td {
+  border: 1px solid;
+  border-collapse: collapse;
+}
+
+table {
+  margin-left: 20px;
+}
+
+th {
+  font-weight: normal;
+  background-color: hwb(170 34% 2%);
+}
+
+td {
+  text-align: center;
+  width: 200px;
+}
+
+tr.dem {
+  background-color: #9cbef1;
+}
+
+tr.repub {
+  background-color: #faaaaa
+}
+
+#tableContainer {
+  width: 1200px;
+  height: 500px;
+  overflow: auto;
 }
