@@ -164,3 +164,17 @@ tr.repub {
   height: 500px;
   overflow: auto;
 }
+
+#loader {
+  font-size: 2em;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

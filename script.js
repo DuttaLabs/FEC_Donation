@@ -19,6 +19,9 @@ document.getElementById("contribForm").addEventListener("submit", (event) => {
   event.preventDefault();
   //const table = document.getElementById("resultsTable");
   //table.setAttribute("display", "none");
+  const loader = document.getElementById("loader"); // for spinning arrow
+  loader.style.display = "inline-block";
+
   const headerTable = document.getElementById("headerTable");
   const resultsTable = document.getElementById("resultsTable");
   resultsTable.style.setProperty("visibility", "hidden");
@@ -31,7 +34,7 @@ document.getElementById("contribForm").addEventListener("submit", (event) => {
   if (selectedState != "AllStates") {
     url += `&contributor_state=${selectedState}`;
   }
- blah blah blah
+
   fetch(url)
     .then((response) => {
       if (!response.ok) {
@@ -88,6 +91,10 @@ document.getElementById("contribForm").addEventListener("submit", (event) => {
     .catch((error) => {
       console.error("There has been a problem with your fetch operation:", error);
       document.getElementById("results").innerHTML = "An error occurred while fetching data.";
+    })
+    .finally(() => {
+      // hide the loader
+      loader.style.display = "none";
     });
   resultsTable.style.setProperty("visibility", "visible");
 });
