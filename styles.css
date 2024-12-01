@@ -160,14 +160,19 @@ tr.repub {
 }
 
 #tableContainer {
+  /* position: relative; */
   width: 1200px;
   height: 500px;
   overflow: auto;
 }
 
 #loader {
+  position: fixed;
   font-size: 2em;
   animation: spin 1s linear infinite;
+  background-color: red;
+  left: 500px;
+  top: 300px;
 }
 
 @keyframes spin {
